@@ -40,20 +40,41 @@ Zum Schluss muss man nur noch den Code für die jeweilige Eingabe implementieren
 Um dies zu verhindern können wir innerhalb des Steuerungs-Events eine Bewegungsgrenze für die betroffene Aktion einstellen.
 
 ```csharp
-if (e.KeyCode == Keys.Up)
-                {
-                    if (currentline != 4)
+ if (e.KeyCode == Keys.Up)
     {
-
-    spieler.Y = spieler.Y - hoeheJeBereich;
-    currentline++;
+        if (currentline != 4)
+            {
+                spieler.Y = spieler.Y - hoeheJeBereich;
+                currentline++;
+            }
+        else
+            {
+                spieler.Y = hoehe - 35;
+            }
     }
-                }
 ```
 
 ### Spiel pausieren
+Um das Spiel pausieren zu können und jegliche Aktionen zu verhindern, muss eine Sperre für die Steuerung und ein Stop für den Timer implementiert werden.
+
+- Um die Sperre für die Steuerung einzurichten können wir abfragen ob der Spiel Status auf `gameOver = true` gesetzt ist.
+  Dafür implementieren wir den unten aufgeführten Code und fügen innerhalb der Verzweigung die Steuerung ein.
+  ```csharp
+  if (!gameOver)
+    {
+        ...
+    }
+  ```
 
 ### Ihr schönstes Ergebnis
+Das schönste Ergebnis, welches wir in unserem Frogger-Projekt erleben durften war, dass wir diverse Farben für unsere Hindernisse ermöglichen konnten.
+Dies hat funktioniert in dem wir einen Random generator, sowie eine Farb Palette angelegt haben und diese Palette anschließend mit RGB Werten befüllt haben.
+
+- Anlegen eines Random Generators `Random rndColor = new Random();`
+- Anlegen von der Farbpallete 
+``Color carColor = Color.FromArgb(rndColor.Next(256), rndColor.Next(256), rndColor.Next(256));``
+- Zuletzt den einfügen des Parameters in das neue Hinderniss
+  `alleHindernisse.Add(new Hindernis(breite, yWertDerBahn, 60, hoeheJeBereich,rndSpeed.Next(1, speed) , carColor));`
 
 
 
