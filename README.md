@@ -37,7 +37,7 @@ Zum Schluss muss man nur noch den Code für die jeweilige Eingabe implementieren
 - Code der bei Aktion ausgeführt werden soll `punktzahl++;`
 
 ### Verhindern, dass ein Spieler aus dem Bild läuft
-Um dies zu verhindern können wir innerhalb des Steuerungs-Events eine Bewegungsgrenze für die betroffene Aktion einstellen.
+Um dies zu verhindern können wir innerhalb des Steuerungs-Events eine Bewegungsgrenze für die betroffene Aktion einstellen. In dem wir dem Programm sagen, dass die currentline nicht gleich 4 sein darf.
 
 ```csharp
  if (e.KeyCode == Keys.Up)
@@ -57,12 +57,13 @@ Um dies zu verhindern können wir innerhalb des Steuerungs-Events eine Bewegungs
 ### Spiel pausieren
 Um das Spiel pausieren zu können und jegliche Aktionen zu verhindern, muss eine Sperre für die Steuerung und ein Stop für den Timer implementiert werden.
 
-- Um die Sperre für die Steuerung einzurichten können wir abfragen ob der Spiel Status auf `gameOver = true` gesetzt ist.
-  Dafür implementieren wir den unten aufgeführten Code und fügen innerhalb der Verzweigung die Steuerung ein.
+- Um die Sperre für die Steuerung einzurichten können wir abfragen ob der Spiel Status pausiert wurde.
+  Dafür können wir einen Code Abschnitt implementieren, der abfragt ob eine Taste für die Pausierung des Spieles benutzt wurde.
   ```csharp
-  if (!gameOver)
+  if (e.KeyCode == Escape)
     {
-        ...
+        Timer.Stop();
+        pausescreen.show();
     }
   ```
 
